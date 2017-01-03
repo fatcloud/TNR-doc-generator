@@ -1,9 +1,19 @@
 #! /usr/bin/env python
 
-from tnvr_input_loader import TNVRDataLoader as loader
-from tnvr_form_exporter import generate_all_forms
+from input_loader import TNVRDataLoader as loader
+from form_exporter import generate_all_forms
 
 from reportlab.lib.utils import ImageReader
+
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+import reportlab.lib.fonts
+
+
+pdfmetrics.registerFont(TTFont('STHeiti','data/STHeiti-Medium.ttc'))
+
+#reportlab.lib.fonts.ps2tt = lambda psfn: ('STHeiti', 0, 0)
+#reportlab.lib.fonts.tt2ps = lambda fn,b,i: 'STHeiti'
 
 
 def tnvr_form_filler(data_row, canvas):
@@ -12,6 +22,9 @@ def tnvr_form_filler(data_row, canvas):
     print('Here is a single row:', data_row, '\n')
     
     # 示範貼上文字
+    # canvas.setFont()
+    print(pdfmetrics.getRegisteredFontNames())
+    canvas.setFont('STHeiti', 12)
     canvas.setFillColorRGB(1,0,0)
     canvas.drawString(10, 100, ' '.join(map(str, data_row)))
 
