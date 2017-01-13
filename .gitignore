@@ -1,3 +1,6 @@
+# sensitive info
+SECRET
+
 # temp file
 *~
 *.pyc

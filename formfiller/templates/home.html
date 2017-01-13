@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>TNVR 核銷單產生器</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        h3 {
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox label, .radio label {
+            line-height: 1.7;
+        }
+
+        .section {
+            margin: 20px;
+        }
+
+        .block {
+            margin-bottom: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container theme-showcase" role="main">
+
+        <div class="jumbotron">
+            <h1>TNVR 核銷單產生器</h1>
+            <p>一支用來陪你走過核銷地獄的小工具</p>
+        </div>
+
+        <div class="section">
+            <form action="result", method="post">
+                <div class="block">
+                    <h3>上傳輸入檔案</h3>
+                    <div class="form-group">
+                        <label for="dataset">上傳資料表</label>
+                        <input type="file" id="dataset">
+                        <p class="help-block">上傳 .xlsx 格式的 TNVR 資料表，範例檔案可參見連結</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photoset">上傳照片</label>
+                        <input type="file" id="photoset">
+                        <p class="help-block">欲產生計畫流程紀錄表，需上傳所有犬隻手術前後的照片打包成的 .zip 壓縮檔，範例檔案可參見連結</p>
+                    </div>
+                </div>
+                <div class="checkbox block">
+                    <h3>選擇要輸出的表單</h3>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="taipei1" checked> 台北市街犬絕育防疫 TNVR 執行計畫流程紀錄表
+                            <br>
+                            <input type="checkbox" name="taipei2" checked> 術後照護證明欄（雜項支出）
+                            <br>
+                            <!--
+                            <input type="checkbox" name="taipei4" checked> 術後照護證明欄（住院）
+                            <br>
+                            <input type="checkbox" name="taipei3" checked> 台北市街犬絕育防疫 TNVR 執行計畫輔助核銷明細表
+                            <br>
+                            !-->
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">產生核銷表單</button>
+            </form>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+
+</html>
