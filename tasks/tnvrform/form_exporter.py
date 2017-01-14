@@ -23,13 +23,13 @@ def dummy_form_filler(row, canvas):
 
 
 
-def generate_form(data_row, form_filler, template):
+def generate_form(data_row, form_filler, template, row_index):
 
     packet = io.BytesIO()
 
     # create a new PDF with Reportlab
     can = Canvas(packet, pagesize=letter)
-    form_filler(data_row, can)
+    form_filler(data_row, can, row_index)
     can.save()
 
     # move to the beginning of the StringIO buffer
@@ -54,8 +54,8 @@ def generate_form(data_row, form_filler, template):
 def generate_all_forms(data_set, form_filler, out_filename, template):
 
     merger = PdfFileMerger()
-    for row in data_set:
-        merger.append(generate_form(row, form_filler, template))
+    for row_index, row in enumerate(data_set):
+        merger.append(generate_form(row, form_filler, template, row_index))
 
     with open(out_filename, 'wb') as fout:
         merger.write(fout)
