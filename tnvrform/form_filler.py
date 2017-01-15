@@ -39,9 +39,9 @@ def tnvr_form_filler(row, canvas, row_index):
 
     form_name = '台北市街犬絕育防疫 TNVR 執行計畫流程紀錄表'
     form_items = [
-        {'item':'Ta1', 'type':'str'   , 'source':'row[6]', 'coord':(190, 685)},
-        {'item':'Ta2', 'type':'opt'   , 'source':'row[7]', 'coord':{'公':(193,662),'母':(347,662)}},
-        {'item':'Ta3', 'type':'opt'   , 'source':'row[8]', 'coord':{'嬰':(227,637),'幼':(217,624),'成':(309,637),'老':(301,624)}},
+        {'item':'Ta1', 'type':'str'   , 'source':'row[6]', 'coord':(190, 687)},
+        {'item':'Ta2', 'type':'opt'   , 'source':'row[7]', 'coord':{'公':(193,663),'母':(348,663)}},
+        {'item':'Ta3', 'type':'opt'   , 'source':'row[8]', 'coord':{'嬰':(227,637),'幼':(220,625),'成':(310,638),'老':(301,624)}},
         {'item':'Ta4', 'type':'opt'   , 'source':'value(row[1])', 'coord':{'無':(233,600),'有':(233,587)}},
         {'item':'Ta4r', 'type':'str'  , 'source': 'reason(row[1])', 'coord':(257,587)},
         {'item':'Timg', 'type':'img'  , 'source':'row[3]+\'pre\'', 'coord':(421,576), 'width':120},
@@ -51,21 +51,21 @@ def tnvr_form_filler(row, canvas, row_index):
         {'item':'Tb3b', 'type':'str'  , 'source':'row[5]', 'coord':(250,510)},
         {'item':'Tb41', 'type':'str'  , 'source':'\'公告於懷生相信動物協會FB公開版面\'', 'coord':(246,490)}, #constant?
         {'item':'Tb42', 'type':'str'  , 'source':'period(row[2])', 'coord':(246,473)}, 
-        {'item':'NVa1', 'type':'str'  , 'source':'str(row[9])', 'coord':(235,451)},
-        {'item':'NVa2', 'type':'opt'  , 'source':'row[7]', 'coord':{'公':(216,434), '母':(280,434)}},
-        {'item':'NVa3', 'type':'opt'  , 'source':'value(row[13])', 'coord':{'否':(251, 415),'是':(222,396)}},
-        {'item':'NVa3r', 'type':'str' , 'source':'reason(row[13])', 'coord':(306,396)},
-        {'item':'NVa4', 'type':'opt'  , 'source':'value(row[14])', 'coord':{'否':(205, 376),'是':(256,376),'安樂死':(205,357)}},
-        {'item':'NVa4r1', 'type':'str', 'source':'reason(row[14]) if \'是\' in row[14][0] else \' \'', 'coord':(307,376)},
-        {'item':'NVa4r2', 'type':'str', 'source':'reason(row[14]) if \'安樂死\' in row[14] else \' \'', 'coord':(285,357)},
-        {'item':'NVa5', 'type':'opt'  , 'source':'row[7]', 'coord':{'公':(216, 338),'母':(280,338)}},
-        {'item':'NVa6', 'type':'str'  , 'source':'str(row[12])', 'coord':(238, 307)},
-        {'item':'NVa7', 'type':'opt'  , 'source':'\'有\'', 'coord':{'有':(251, 280),'無':(333,280)}}, #constant option
+        {'item':'NV1', 'type':'str'  , 'source':'str(row[9])', 'coord':(235,453)},
+        {'item':'NV2', 'type':'opt'  , 'source':'row[7]', 'coord':{'公':(216,434), '母':(280,434)}},
+        {'item':'NV3', 'type':'opt'  , 'source':'value(row[13])', 'coord':{'否':(251, 415),'是':(222,396)}},
+        {'item':'NV3r', 'type':'str' , 'source':'reason(row[13])', 'coord':(306,396)},
+        {'item':'NV4', 'type':'opt'  , 'source':'value(row[14])', 'coord':{'否':(205, 376),'是':(256,376),'安樂死':(205,357)}},
+        {'item':'NV4r1', 'type':'str', 'source':'reason(row[14]) if \'是\' in row[14][0] else \' \'', 'coord':(307,376)},
+        {'item':'NV4r2', 'type':'str', 'source':'reason(row[14]) if \'安樂死\' in row[14] else \' \'', 'coord':(285,358)},
+        {'item':'NV5', 'type':'opt'  , 'source':'row[7]', 'coord':{'公':(217, 338),'母':(280,338)}},
+        {'item':'NV6', 'type':'str'  , 'source':'str(row[12])', 'coord':(238, 310)},
+        {'item':'NV7', 'type':'opt'  , 'source':'\'有\'', 'coord':{'有':(251, 280),'無':(333,280)}}, #constant option
         {'item':'NVimg', 'type':'img' , 'source':'row[3]+\'post\'', 'coord':(421, 307), 'width':120},
-        {'item':'Ra1', 'type':'str'   , 'source':'str(row[10])', 'coord':(230, 240)},
-        {'item':'Ra2', 'type':'opt'   , 'source':'\'補助\'', 'coord':{'補助':(200, 197),'自費':(257, 197)}}, #constant option
+        {'item':'R1', 'type':'str'   , 'source':'str(row[10])', 'coord':(230, 241)},
+        {'item':'R2', 'type':'opt'   , 'source':'\'補助\'', 'coord':{'補助':(200, 197),'自費':(257, 197)}}, #constant option
         #'Rimg' : {'type':'img' , 'source':'stamp', 'coord':(197, 118)},
-        {'item':'Rar', 'type':'str' , 'source':'row[40] if row[40] is not None else \'\'', 'coord':(424, 117)},
+        {'item':'Rr', 'type':'str' , 'source':'row[40] if row[40] is not None else \'\'', 'coord':(424, 117)},
     ]
     canvas.setFont('STHeiti', 12)
     canvas.setFillColor(red)
