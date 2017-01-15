@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
 #DEBUG = True
 
-ALLOWED_HOSTS = ['https://tnvr-form-gen.herokuapp.com/']
+ALLOWED_HOSTS = ['tnvr-form-gen.herokuapp.com']
 
 
 # Application definition
