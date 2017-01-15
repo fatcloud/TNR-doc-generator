@@ -21,6 +21,6 @@ from formfiller.views import *
 
 urlpatterns = [
     url(r'^$', home),
-    url(r'^result$', result),
+    url(r'^proc_msg$', proc_msg),
     url(r'^admin/', admin.site.urls),
 ]

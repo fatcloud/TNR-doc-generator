@@ -3,60 +3,61 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 
-import zipfile
 from wsgiref.util import FileWrapper
 
+import shutil
+import zipfile
+import subprocess
+
+
+
+
 def home(request):
-    # Handle file upload
-    '''
+
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'])
-            newdoc.save()
+        print(request.FILES)
+        dataset = request.FILES['dataset']
+        photoset = request.FILES['photoset']
 
-            # Redirect to the document list after POST
-            return HttpResponseRedirect(reverse('list'))
+        # save dataset (overwrite the original one)
+        with open('tnvrform/input.xlsx', 'wb') as destination:
+            for chunk in dataset.chunks():
+                destination.write(chunk)
+
+        # save photoset
+        shutil.rmtree('tnvrform/img/')
+        zf = zipfile.ZipFile(photoset, mode='r')
+        zf.extractall('tnvrform/img/')
+
+        # execute for generator
+        p = subprocess.Popen(['python', 'form_filler.py'], cwd='tnvrform')
+        p.wait()
+
+        filename = 'tnvrform/output.pdf'
+        with open(filename, 'rb') as f:
+            response = HttpResponse(f.read(), content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename=' + filename
+        # response['Content-Length'] = getsize(filename)
+        return response
+
     else:
-        form = DocumentForm()  # A empty, unbound form
 
-    # Load documents for the list page
-    documents = Document.objects.all()
-    '''
-    # Render list page with the documents and the form
-    return render(
-        request,
-        'home.html',
-        {}
+        return render(
+            request,
+            'home.html',
+            {}
     )
 
 
 
 # generate the file
-def result(request):
-    post = request.POST
-    #if post['taipei1'] == 'on':
-        # 產生第一個表格檔案
-    #    pass
-    '''
-    zfilename = 'forms.zip'
-    zf = zipfile.ZipFile(zfilename, mode='w')
-    try:
-        print 'adding README.txt'
-        zf.write('README.txt')
-    finally:
-        print 'closing'
-        zf.close()    
-    '''
-    
+def proc_msg(request):
+
     response = render(
         request,
-        'home.html',
+        'result.html',
         {},
-        content_type='application/zip'
     )
     # 一個顯示下載連結的頁面：若沒有自動開始下載請按此
-    #response = HttpResponse(FileWrapper(myfile.getvalue()), content_type='application/zip')
-    response['Content-Disposition'] = 'attachment; filename=' + zfilename
+    response = HttpResponse('<p>hahaha</p>')
     return response
-
