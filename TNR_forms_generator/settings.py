@@ -29,6 +29,8 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG', ''))
 
 ALLOWED_HOSTS = ['tnvr-form-gen.herokuapp.com']
 
+if DEBUG:
+    ALLOWED_HOSTS.append('localhost')
 
 # Application definition
 
