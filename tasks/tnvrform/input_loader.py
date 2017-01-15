@@ -31,10 +31,13 @@ class TNVRDataLoader(object):
     @staticmethod
     def __looks_good(row):
         items = [cell.value for cell in row]
-        try:
-            return items[7] in '公母' and items[8] in '成幼'
-        except:
+        
+        # 跳過空行
+        if items == [None] * len(items):
             return False
+        
+        # A 欄有字，整列無視
+        return items[0] is None 
 
 
 

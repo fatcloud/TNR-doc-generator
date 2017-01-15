@@ -7,7 +7,7 @@ from reportlab.lib.utils import ImageReader
 
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib.colors import yellow, red
+from reportlab.lib.colors import Color, red
 import reportlab.lib.fonts
 
 from datetime import datetime,timedelta
@@ -26,7 +26,7 @@ def tnvr_form_filler(row, canvas, row_index):
         date = datetime.strptime(time, "%Y/%m/%d")
         db = date - timedelta(days = 8)
         de = date - timedelta(days = 1)
-        period = db.strftime("%Y/%m/%d")+' - '+ de.strftime("%m/%d")
+        period = db.strftime("%Y/%m/%d")+' - '+ de.strftime("%Y/%m/%d")
         return period
     
     
@@ -34,7 +34,7 @@ def tnvr_form_filler(row, canvas, row_index):
         return data.split('/')[0]
     
     def reason(data):
-        return data.split('/')[-1] if '/' in row[1] else ''
+        return data.split('/')[-1] if '/' in data else ''
          
 
     form_name = '台北市街犬絕育防疫 TNVR 執行計畫流程紀錄表'
@@ -45,7 +45,7 @@ def tnvr_form_filler(row, canvas, row_index):
         {'item':'Ta4', 'type':'opt'   , 'source':'value(row[1])', 'coord':{'無':(233,600),'有':(233,587)}},
         {'item':'Ta4r', 'type':'str'  , 'source': 'reason(row[1])', 'coord':(257,587)},
         {'item':'Timg', 'type':'img'  , 'source':'row[3]+\'pre\'', 'coord':(421,576), 'width':120},
-        {'item':'Tb1', 'type':'str'   , 'source':'\'某某某\'', 'coord':(203,550)}, #constant?
+        {'item':'Tb1', 'type':'str'   , 'source':'\'陳淑娟\'', 'coord':(203,553)}, #constant?
         {'item':'Tb2', 'type':'str'   , 'source':'str(row[2])', 'coord':(235,533)},
         {'item':'Tb3a', 'type':'str'  , 'source':'row[4]', 'coord':(213,510)},
         {'item':'Tb3b', 'type':'str'  , 'source':'row[5]', 'coord':(250,510)},
@@ -53,8 +53,8 @@ def tnvr_form_filler(row, canvas, row_index):
         {'item':'Tb42', 'type':'str'  , 'source':'period(row[2])', 'coord':(246,473)}, 
         {'item':'NVa1', 'type':'str'  , 'source':'str(row[9])', 'coord':(235,451)},
         {'item':'NVa2', 'type':'opt'  , 'source':'row[7]', 'coord':{'公':(216,434), '母':(280,434)}},
-        {'item':'NVa3', 'type':'opt'  , 'source':'value(row[13])', 'coord':{'否':(251, 415),'是':(222,395)}},
-        {'item':'NVa3r', 'type':'str' , 'source':'reason(row[13])', 'coord':(305,395)},
+        {'item':'NVa3', 'type':'opt'  , 'source':'value(row[13])', 'coord':{'否':(251, 415),'是':(222,396)}},
+        {'item':'NVa3r', 'type':'str' , 'source':'reason(row[13])', 'coord':(306,396)},
         {'item':'NVa4', 'type':'opt'  , 'source':'value(row[14])', 'coord':{'否':(205, 376),'是':(256,376),'安樂死':(205,357)}},
         {'item':'NVa4r1', 'type':'str', 'source':'reason(row[14]) if \'是\' in row[14][0] else \' \'', 'coord':(307,376)},
         {'item':'NVa4r2', 'type':'str', 'source':'reason(row[14]) if \'安樂死\' in row[14] else \' \'', 'coord':(285,357)},
@@ -65,7 +65,7 @@ def tnvr_form_filler(row, canvas, row_index):
         {'item':'Ra1', 'type':'str'   , 'source':'str(row[10])', 'coord':(230, 240)},
         {'item':'Ra2', 'type':'opt'   , 'source':'\'補助\'', 'coord':{'補助':(200, 197),'自費':(257, 197)}}, #constant option
         #'Rimg' : {'type':'img' , 'source':'stamp', 'coord':(197, 118)},
-        #'Rar': {'type':'str' , 'source':'row[40]', 'coord':(424, 117)},
+        {'item':'Rar', 'type':'str' , 'source':'row[40] if row[40] is not None else \'\'', 'coord':(424, 117)},
     ]
     canvas.setFont('STHeiti', 12)
     canvas.setFillColor(red)
@@ -108,17 +108,17 @@ def tnvr_form_filler(row, canvas, row_index):
             for index in column_indexs:
                 print(row[index])
                 
-            canvas.setFillColor(yellow)
-            coords = list(icoord.values()) if type(icoord) is dict else icoord
+            canvas.setFillColor(Color(100, 100, 0, 0.5))
+            coords = list(icoord.values()) if type(icoord) is dict else [icoord]
 
             for coord in coords:
-                canvas.rect(*coord , 10.0, 10.0, fill=1)
+                canvas.rect(*coord , 10.0, 10.0, fill=1, stroke=0)
             canvas.setFillColor(red)
 
 
 if __name__ == '__main__':
-    #xlsx_data = loader('data/tnvr 工具輸入檔.xlsx').data
     xlsx_data = loader('data/error_example.xlsx').data
+    #xlsx_data = loader('data/example.xlsx').data
     generate_all_forms( data_set=xlsx_data,
                         form_filler=tnvr_form_filler,
                         out_filename='output.pdf',
