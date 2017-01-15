@@ -49,8 +49,8 @@ def tnvr_form_filler(row, canvas, row_index):
         {'item':'Tb2', 'type':'str'   , 'source':'str(row[2])', 'coord':(235,533)},
         {'item':'Tb3a', 'type':'str'  , 'source':'row[4]', 'coord':(213,510)},
         {'item':'Tb3b', 'type':'str'  , 'source':'row[5]', 'coord':(250,510)},
-        {'item':'Tb41', 'type':'str'  , 'source':'\'公告於懷生相信動物協會FB公開版面\'', 'coord':(246,490)}, #constant?
-        {'item':'Tb42', 'type':'str'  , 'source':'period(row[2])', 'coord':(246,473)}, 
+        {'item':'Tb41', 'type':'str'  , 'source':'\'公告於懷生相信動物協會FB公開版面\'', 'coord':(248,488)}, #constant?
+        {'item':'Tb42', 'type':'str'  , 'source':'period(row[2])', 'coord':(248,473)}, 
         {'item':'NV1', 'type':'str'  , 'source':'str(row[9])', 'coord':(235,453)},
         {'item':'NV2', 'type':'opt'  , 'source':'row[7]', 'coord':{'公':(216,434), '母':(280,434)}},
         {'item':'NV3', 'type':'opt'  , 'source':'value(row[13])', 'coord':{'否':(251, 415),'是':(222,396)}},
