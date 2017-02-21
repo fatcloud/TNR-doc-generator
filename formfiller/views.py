@@ -15,19 +15,19 @@ import subprocess
 def home(request):
 
     if request.method == 'POST':
-        print(request.FILES)
-        dataset = request.FILES['dataset']
-        photoset = request.FILES['photoset']
 
+        dataset = request.FILES['dataset']
         # save dataset (overwrite the original one)
         with open('tnvrform/input.xlsx', 'wb') as destination:
             for chunk in dataset.chunks():
                 destination.write(chunk)
 
         # save photoset
+        photoset = request.FILES.get('photoset', None)
         shutil.rmtree('tnvrform/img/')
-        zf = zipfile.ZipFile(photoset, mode='r')
-        zf.extractall('tnvrform/img/')
+        if photoset is not None:
+            zf = zipfile.ZipFile(photoset, mode='r')
+            zf.extractall('tnvrform/img/')
 
         # execute for generator
         p = subprocess.Popen(['python', 'form_filler.py'], cwd='tnvrform')
