@@ -7,7 +7,7 @@ from reportlab.lib.utils import ImageReader
 
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib.colors import Color, red
+from reportlab.lib.colors import Color, black
 import reportlab.lib.fonts
 
 from datetime import datetime,timedelta
@@ -44,7 +44,7 @@ def tnvr_form_filler(row, canvas, row_index):
         {'item':'Ta3', 'type':'opt'   , 'source':'row[8]', 'coord':{'嬰':(227,637),'幼':(220,625),'成':(310,638),'老':(301,624)}},
         {'item':'Ta4', 'type':'opt'   , 'source':'value(row[1])', 'coord':{'無':(233,600),'有':(233,587)}},
         {'item':'Ta4r', 'type':'str'  , 'source': 'reason(row[1])', 'coord':(257,587)},
-        {'item':'Timg', 'type':'img'  , 'source':'row[3]+\'pre\'', 'coord':(421,576), 'width':120},
+        {'item':'Timg', 'type':'img'  , 'source':'row[3]+\'e\'', 'coord':(421,576), 'width':120},
         {'item':'Tb1', 'type':'str'   , 'source':'\'陳淑娟\'', 'coord':(203,553)}, #constant?
         {'item':'Tb2', 'type':'str'   , 'source':'str(row[2])', 'coord':(235,533)},
         {'item':'Tb3a', 'type':'str'  , 'source':'row[4]', 'coord':(213,510)},
@@ -61,14 +61,14 @@ def tnvr_form_filler(row, canvas, row_index):
         {'item':'NV5', 'type':'opt'  , 'source':'row[7]', 'coord':{'公':(217, 338),'母':(280,338)}},
         {'item':'NV6', 'type':'str'  , 'source':'str(row[12])', 'coord':(238, 310)},
         {'item':'NV7', 'type':'opt'  , 'source':'\'有\'', 'coord':{'有':(251, 280),'無':(333,280)}}, #constant option
-        {'item':'NVimg', 'type':'img' , 'source':'row[3]+\'post\'', 'coord':(421, 307), 'width':120},
+        {'item':'NVimg', 'type':'img' , 'source':'row[3]+\'o\'', 'coord':(421, 307), 'width':120},
         {'item':'R1', 'type':'str'   , 'source':'str(row[10])', 'coord':(230, 241)},
         {'item':'R2', 'type':'opt'   , 'source':'\'補助\'', 'coord':{'補助':(200, 197),'自費':(257, 197)}}, #constant option
         #'Rimg' : {'type':'img' , 'source':'stamp', 'coord':(197, 118)},
         {'item':'Rr', 'type':'str' , 'source':'row[40] if row[40] is not None else \'\'', 'coord':(424, 117)},
     ]
     canvas.setFont('STHeiti', 12)
-    canvas.setFillColor(red)
+    canvas.setFillColor(black)
 
     for item in form_items:
         itype, isource, icoord = item['type'], item['source'], item['coord']
