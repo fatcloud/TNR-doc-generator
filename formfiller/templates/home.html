@@ -44,14 +44,14 @@
 
         <div class="jumbotron">
             <h1>TNVR 核銷單產生器</h1>
-            <p>一支用來陪你走過核銷地獄的小工具 v0.13</p>
+            <p>一支用來陪你走過核銷地獄的小工具 v0.15</p>
         </div>
 
 
         <form action="" , method="post" class="section" enctype="multipart/form-data">
 
             <div class="block">
-                <h4>上傳資料表</h4>
+                <h4>上傳資料表 [必需]</h4>
 
                 <p class="help-block" style="display:inline-block">
                     提供 TNVR 資料表，範例檔案參見
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="block">
-                <h4>上傳手術前後照片</h4>
+                <h4>上傳手術前後照片 [可跳過]</h4>
                 <p class="help-block">欲產生計畫流程紀錄表，需上傳所有犬隻手術前後的照片打包成的 .zip 壓縮檔，範例檔案可參見
                     <a href="https://drive.google.com/drive/folders/0B5xTLBJxg-_wTDBfYmoxSzgxQ0E" target="_blank">連結</a>
                     <br>
@@ -113,7 +113,8 @@
                 </div>
 
             </div>
-            <button type="submit" class="btn btn-success" style="center" id="sendform">請幫我產生一份有夠長的核銷 pdf 檔案謝謝</button>
+            <button type="submit" class="btn btn-success" style="center" id="sendform">產生核銷檔案</button>
+            <p class="help-block">出了無法自動填寫的小錯誤時，會用淺黃色方塊在回傳的 pdf 檔案裡標出來</p>
             <p id="proc_msg">
             </p>
         </form>

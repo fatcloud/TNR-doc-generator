@@ -74,14 +74,15 @@ def tnvr_form_filler(row, canvas, row_index):
     for item in form_items:
         itype, isource, icoord = item['type'], item['source'], item['coord']
 
-        if itype == 'opt':
-            xx, yy = icoord[eval(isource)]
-            icoord[eval(isource)] = xx * 0.98, yy * 1.04
-        else:
-            xx, yy = icoord
-            icoord = xx * 0.98, yy * 1.04
-        
         try:
+
+            if itype == 'opt':
+                xx, yy = icoord[eval(isource)]
+                icoord[eval(isource)] = xx * 0.98, yy * 1.04
+            else:
+                xx, yy = icoord
+                icoord = xx * 0.98, yy * 1.04
+
             if itype == 'str':
                 canvas.drawString(*icoord, eval(isource))
             if itype == 'opt':
@@ -121,8 +122,10 @@ def tnvr_form_filler(row, canvas, row_index):
             coords = list(icoord.values()) if type(icoord) is dict else [icoord]
 
             for coord in coords:
+                xx, yy = coord
+                coord = xx * 0.98, yy * 1.04
                 canvas.rect(*coord , 10.0, 10.0, fill=1, stroke=0)
-            canvas.setFillColor(red)
+            canvas.setFillColor(black)
 
 
 if __name__ == '__main__':
