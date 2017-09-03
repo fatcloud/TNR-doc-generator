@@ -1,6 +1,11 @@
 # sensitive info
 SECRET
 
+tnvrform/img/*
+tnvrform/input.xlsx
+tnvrform/output.pdf
+
+
 # temp file
 *~
 *.pyc

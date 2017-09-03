@@ -8,7 +8,8 @@ from wsgiref.util import FileWrapper
 import shutil
 import zipfile
 import subprocess
-
+import os
+import contextlib
 
 
 
@@ -24,21 +25,34 @@ def home(request):
 
         # save photoset
         photoset = request.FILES.get('photoset', None)
-        shutil.rmtree('tnvrform/img/')
+        shutil.rmtree('tnvrform/img/', ignore_errors=True)
         if photoset is not None:
             zf = zipfile.ZipFile(photoset, mode='r')
             zf.extractall('tnvrform/img/')
 
         # execute for generator
-        p = subprocess.Popen(['python', 'form_filler.py'], cwd='tnvrform')
-        p.wait()
-
         filename = 'tnvrform/output.pdf'
-        with open(filename, 'rb') as f:
-            response = HttpResponse(f.read(), content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename=' + filename
+        errlog = 'tnvrform/stderr.txt'
+
+        with contextlib.suppress(FileNotFoundError):
+            os.remove(filename)
+            os.remove(errlog)
+ 
+        with open(errlog,"wb") as err:
+            p = subprocess.Popen(['python', 'form_filler.py'], cwd='tnvrform', stderr=err)
+            p.wait()
+
+        try:
+            with open(filename, 'rb') as f:
+                response = HttpResponse(f.read(), content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename=' + filename
+        except FileNotFoundError:
+            with open(errlog, 'rb') as f:
+                response = HttpResponse(f.read(), content_type='application/txt')
+            response['Content-Disposition'] = 'attachment; filename=' + errlog
+        
         # response['Content-Length'] = getsize(filename)
-        return response
+        return response            
 
     else:
 
