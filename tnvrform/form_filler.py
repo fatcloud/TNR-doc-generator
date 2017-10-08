@@ -43,7 +43,7 @@ def tnvr_form_filler(row, canvas, row_index):
         {'item':'Ta2', 'type':'opt'   , 'source':'row[8]', 'coord':{'公':(184,663),'母':(329,663)}},
         {'item':'Ta3', 'type':'opt'   , 'source':'row[9]', 'coord':{'嬰':(220,637),'幼':(178,625),'成':(297,638),'老':(253,625)}},
         {'item':'Ta4', 'type':'opt'   , 'source':'value(row[1])', 'coord':{'無':(221,601),'有':(167,587)}},
-        {'item':'Ta4r', 'type':'str'  , 'source': 'reason(row[1])', 'coord':(197,565)},
+        {'item':'Ta4r', 'type':'str'  , 'source': 'reason(row[1])', 'coord':(197,587)},
         {'item':'Timg', 'type':'img'  , 'source':'row[3]+\'e\'', 'coord':(429,575), 'width':130},
         {'item':'Tb1', 'type':'str'   , 'source':'\'陳淑娟\'', 'coord':(193,556)}, #constant?
         {'item':'Tb2', 'type':'str'   , 'source':'str(row[2])', 'coord':(225,533)},
@@ -55,10 +55,10 @@ def tnvr_form_filler(row, canvas, row_index):
         {'item':'NV1', 'type':'str'  , 'source':'str(row[10])', 'coord':(224,455)},
         {'item':'NV2', 'type':'opt'  , 'source':'row[8]', 'coord':{'公':(205,435), '母':(265,435)}},
         {'item':'NV3', 'type':'opt'  , 'source':'value(row[14])', 'coord':{'否':(238, 417),'是':(172,396)}},
-        {'item':'NV3r', 'type':'str' , 'source':'reason(row[14])', 'coord':(260,382)},
+        {'item':'NV3r', 'type':'str' , 'source':'reason(row[14])', 'coord':(253,396)},
         {'item':'NV4', 'type':'opt'  , 'source':'value(row[15])', 'coord':{'否':(195, 378),'是':(256,376),'安樂死':(200,357)}},
-        {'item':'NV4r1', 'type':'str', 'source':'reason(row[15]) if \'是\' in row[15][0] else \' \'', 'coord':(310,363)},
-        {'item':'NV4r2', 'type':'str', 'source':'reason(row[15]) if \'安樂死\' in row[15] else \' \'', 'coord':(288,345)},
+        {'item':'NV4r1', 'type':'str', 'source':'reason(row[15]) if \'是\' in row[15][0] else \' \'', 'coord':(310,377)},
+        {'item':'NV4r2', 'type':'str', 'source':'reason(row[15]) if \'安樂死\' in row[15] else \' \'', 'coord':(288,358)},
         {'item':'NV5', 'type':'opt'  , 'source':'row[8]', 'coord':{'公':(207, 339),'母':(267,339)}},
         {'item':'NV6', 'type':'str'  , 'source':'str(row[13])', 'coord':(238, 310)},
         {'item':'NV7', 'type':'opt'  , 'source':'\'有\'', 'coord':{'有':(238, 282),'無':(333,280)}}, #constant option
